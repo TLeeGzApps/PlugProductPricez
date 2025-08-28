@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profit Calculator — Phase 2</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-bar">
+    <h1>Profit Calculator</h1>
+    <div class="bar-actions">
+      <button id="themeToggle" aria-label="Toggle theme">🌗</button>
+      <button id="printBtn" aria-label="Print results">🖨️</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card form-card">
+      <h2>Inputs</h2>
+      <div class="grid two">
+        <div class="field">
+          <label for="totalCost">Total Cost ($)</label>
+          <input type="number" id="totalCost" placeholder="e.g., 500" min="0" step="0.01" required />
+          <div class="error" id="errCost"></div>
+        </div>
+
+        <div class="field">
+          <label for="productWeight">Product Weight</label>
+          <div class="inline">
+            <input type="number" id="productWeight" placeholder="e.g., 112" min="0" step="0.01" required />
+            <select id="weightUnit" aria-label="Weight unit">
+              <option value="g">grams (g)</option>
+              <option value="oz">ounces (oz)</option>
+              <option value="lb">pounds (lb)</option>
+            </select>
+          </div>
+          <div class="error" id="errWeight"></div>
+        </div>
+      </div>
+
+      <h3>Profit Settings</h3>
+      <div class="grid three">
+        <div class="field">
+          <label for="pGram">Per 1g ($)</label>
+          <input type="number" id="pGram" value="10" min="0" step="0.01" />
+        </div>
+        <div class="field">
+          <label for="pBall">Per 3.5g ($)</label>
+          <input type="number" id="pBall" value="10" min="0" step="0.01" />
+        </div>
+        <div class="field">
+          <label for="pQuarter">Per 0.25oz ($)</label>
+          <input type="number" id="pQuarter" value="10" min="0" step="0.01" />
+        </div>
+        <div class="field">
+          <label for="pHalf">Per 0.5oz ($)</label>
+          <input type="number" id="pHalf" value="10" min="0" step="0.01" />
+        </div>
+        <div class="field">
+          <label for="pZip">Per 1oz ($)</label>
+          <input type="number" id="pZip" value="10" min="0" step="0.01" />
+        </div>
+        <div class="field">
+          <label for="pElbow">Per 1lb ($)</label>
+          <input type="number" id="pElbow" value="50" min="0" step="0.01" />
+        </div>
+      </div>
+
+      <div class="field inline">
+        <input type="number" id="applyAll" placeholder="Set all profits…" min="0" step="0.01" />
+        <button id="applyAllBtn" type="button">Apply to All (except 1lb)</button>
+      </div>
+
+      <div class="actions">
+        <button id="calcBtn">Calculate</button>
+        <button id="saveBtn" class="secondary" disabled>Save to History</button>
+        <button id="clearBtn" class="ghost">Clear</button>
+        <button id="exportCurrent" class="secondary" disabled>Export Current (CSV)</button>
+      </div>
+    </section>
+
+    <section class="card results-card" id="resultsCard" hidden>
+      <h2>Results</h2>
+      <div id="results" class="grid two fade"></div>
+    </section>
+
+    <section class="card history-card">
+      <div class="history-header">
+        <h2>History</h2>
+        <div class="actions">
+          <button id="exportHistory" class="secondary">Export History (CSV)</button>
+          <button id="clearHistory" class="danger">Clear History</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table id="historyTable" aria-label="Saved calculations">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Spent
